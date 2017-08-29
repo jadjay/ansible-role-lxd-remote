@@ -26,7 +26,7 @@ Available variable are:
 
 ## Example playbook
 
-**Inventory**
+### Inventory
 
 ```
 [containerships]
@@ -34,7 +34,7 @@ clementine ansible_host=2.16.3.168
 gudrun     ansible_host=cs.maersk.com
 ```
 
-**Playbook**
+### Playbook
 
 ```
 - hosts: containerships
@@ -42,7 +42,7 @@ gudrun     ansible_host=cs.maersk.com
     - jadjay.lxd-remote
 ```
 
-**Variables**
+### Variables**
 
 *File: group_vars/containerships.yml*
 ```
