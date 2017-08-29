@@ -1,0 +1,2 @@
+lxd_port: "8443"
+lxd_url: "https://{{ ansible_default_ipv4.address }}:{{ lxd_port }}"

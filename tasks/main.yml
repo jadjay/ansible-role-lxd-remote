@@ -1,0 +1,12 @@
+- name: List needed variables
+  debug: 
+    msg: "| remote name: {{ inventory_hostname }} - ip_address: {{ ansible_default_ipv4.address }} - password: {{ lxd_password }} -  url: {{ lxd_url }}"
+- name: Check 
+  become: false
+  local_action: raw /usr/bin/lxc remote list | grep "{{  inventory_hostname }}" 
+  register: lxcoutput
+  ignore_errors: yes
+- name: Set remote
+  become: false
+  local_action: raw lxc remote add '{{ inventory_hostname }}' '{{ lxd_url }}' --accept-certificate '--password={{ lxd_password }}'
+  when: lxcoutput == ""
