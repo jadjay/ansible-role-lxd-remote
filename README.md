@@ -42,7 +42,7 @@ gudrun     ansible_host=cs.maersk.com
     - jadjay.lxd-remote
 ```
 
-### Variables**
+### Variables
 
 *File: group_vars/containerships.yml*
 ```
