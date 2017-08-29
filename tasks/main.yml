@@ -1,9 +1,16 @@
 - name: List needed variables
   debug: 
     msg: "| remote name: {{ inventory_hostname }} - ip_address: {{ ansible_default_ipv4.address }} - password: {{ lxd_password }} -  url: {{ lxd_url }}"
-- name: Check 
+- name: Check distant activation
+  raw: lxc config show 
+  register: lxcconfoutput
+  ignore_errors: yes
+- name: Activate remote
+  raw: lxc config set core.https_address "[::]:{{ lxd_port }}" ; lxc config set core.trust_password "{{ lxd_password }}"
+  when: not 'core.trust_password{{ ":" }} true' in lxcconfoutput.stdout
+- name: Check local presence
   become: false
-  local_action: raw /usr/bin/lxc remote list | grep "{{  inventory_hostname }}" 
+  local_action: raw lxc remote list | grep "{{  inventory_hostname }}" 
   register: lxcoutput
   ignore_errors: yes
 - name: Set remote
